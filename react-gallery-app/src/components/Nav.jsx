@@ -2,12 +2,14 @@ import React from "react";
 
 const Nav = () => {
     return (
-        <div>
-            <ul>
-                <li>Nav Link</li>
-                <li>Nav Link 2</li>
-                <li>Nav Link 3</li>
-            </ul>
-        </div>
+        <nav className="main-nav">
+        <ul>
+          <li><a href='#'>Cats</a></li>
+          <li><a href='#'>Dogs</a></li>
+          <li><a href='#'>Computers</a></li>
+        </ul>
+      </nav>
     )
 }
+
+export default Nav;
