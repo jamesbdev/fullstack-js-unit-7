@@ -2,7 +2,7 @@ import React from "react";
 import Photo from "./Photo";
 
 
-const Photolist = () => {
+const PhotoList = () => {
     return(
         <>
         <ul>
@@ -12,4 +12,4 @@ const Photolist = () => {
     )
 }
 
-export default Photolist;
+export default PhotoList;
