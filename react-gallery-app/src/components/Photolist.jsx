@@ -2,14 +2,29 @@ import React from "react";
 import Photo from "./Photo";
 
 
-const PhotoList = () => {
+const PhotoList = (props) => {
+  const photos = props.photos;
+  console.log(photos);
+  if (photos !== null) {
     return(
-        <>
+      <div className="photo-container">
         <ul>
-            <Photo />
+          { photos.map((photo, index) => {
+            return <Photo key={index} photo={photo}/>;
+          
+          })}
         </ul>
-        </>
+      </div>
+    
+  ) 
+  } else {
+    return (
+      <div className="photo-container">
+ 
+    </div>
     )
+  }
+   
 }
 
 export default PhotoList;
