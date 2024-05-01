@@ -7,6 +7,8 @@ const PhotoList = (props) => {
   console.log(photos);
   if (photos !== null) {
     return(
+      <div>
+      <h2>{props.title}</h2>
       <div className="photo-container">
         <ul>
           { photos.map((photo, index) => {
@@ -15,6 +17,8 @@ const PhotoList = (props) => {
           })}
         </ul>
       </div>
+      </div>
+
     
   ) 
   } else {

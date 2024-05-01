@@ -11,23 +11,23 @@ import { useState, useEffect } from 'react';
 function App() {
   const [photos, setPhotos] = useState(null);
 
-  //useEffect(()=> {
+  useEffect(()=> {
     const fetchData = async (queryText) => {
       const response = await fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${queryText}&per_page=24&format=json&nojsoncallback=1`);
       const data = await response.json();
       setPhotos(data.photos.photo);
     };
 
-    fetchData("Korea");
+    fetchData("dog");
    
-  //}, []);
+  }, []);
 
 
   return (
     <>
-     <Search search={fetchData}/>
+     <Search/>
      <Nav />
-     <Photolist photos={photos} title="test"/>
+     <Photolist photos={photos} title={queryText}/>
      
     </>
   )
