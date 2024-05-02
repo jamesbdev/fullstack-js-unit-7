@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { Navigate } from 'react-router-dom';
 
 
 const Search = (props) => {
@@ -11,11 +12,16 @@ const Search = (props) => {
   }
 
   const searchHandler = (event) => {
+    //prevent form submission
     event.preventDefault();
-
+    //make request for the input value
     props.search(inputValue);
     //display new images
     //redirect user to search query route
+    return(
+      <Navigate to={`/search/:${inputValue}`} />
+    )
+
   }
 
 
