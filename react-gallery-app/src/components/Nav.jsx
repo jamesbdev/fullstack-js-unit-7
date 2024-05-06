@@ -1,12 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const Nav = () => {
+const Nav = (props) => {
+  console.log("Nav component has been rendered");
     return (
         <nav className="main-nav">
         <ul>
           <li>
-          <NavLink to="/cats"> Cats </NavLink>
+          <NavLink to="/cats">Cats</NavLink>
           </li>
           <li>
           <NavLink to="/dogs">Dogs</NavLink>

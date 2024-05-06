@@ -1,30 +1,36 @@
 import React from "react";
 import Photo from "./Photo";
+import Search from "./Search";
 
 
 const PhotoList = (props) => {
+  console.log("Photolist component has been rendered");
+  //store array of photos
   const photos = props.photos;
-  console.log(photos);
-  if (photos !== null) {
+ 
+  if (photos !== null && photos !== undefined) {
     return(
-      <div>
-      <h2>{props.title}</h2>
-      <div className="photo-container">
-        <ul>
-          { photos.map((photo, index) => {
-            return <Photo key={index} photo={photo}/>;
+      <>
+        <div className="photo-container">
+          <h2>{props.title}</h2>
+          <ul>
+            {/* iterate through photo array and display Photo component */}
+            { photos.map((photo, index) => {
+              return <Photo key={index} photo={photo}/>;
           
-          })}
-        </ul>
-      </div>
-      </div>
+            })}
+          </ul>
+       </div>
+      </>
 
     
   ) 
   } else {
     return (
+      
       <div className="photo-container">
- 
+        <Search />
+       <h2> photo is undefined</h2>
     </div>
     )
   }
