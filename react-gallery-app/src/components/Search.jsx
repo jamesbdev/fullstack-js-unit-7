@@ -1,10 +1,9 @@
 import React from "react";
 import { useState } from "react";
-import { Navigate } from 'react-router-dom';
+import { Navigate, Route } from 'react-router-dom';
 
 
 const Search = (props) => {
-  console.log("search has been rendered");
   //controls the state for the input value
   const [inputValue, setInputValue ] = useState('');
   //state to check if the form has been submited

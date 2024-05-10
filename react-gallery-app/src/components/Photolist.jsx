@@ -4,7 +4,6 @@ import Search from "./Search";
 
 
 const PhotoList = (props) => {
-  console.log("Photolist component has been rendered");
   //store array of photos
   const photos = props.photos;
  
