@@ -1,9 +1,11 @@
 import React from "react";
 import Photo from "./Photo";
 import Search from "./Search";
+import { useParams } from "react-router";
 
 
 const PhotoList = (props) => {
+  const { searchParam } = useParams();
   //store array of photos
   const photos = props.photos;
  
