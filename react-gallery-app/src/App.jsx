@@ -1,17 +1,39 @@
 
 import './App.css'
 import apiKey from './config';
-import Photo from './components/Photo';
 import Nav from './components/Nav';
 import Photolist from './components/PhotoList';
 import Search from './components/Search';
 import { useState, useEffect } from 'react';
-import { useNavigate, redirect, Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 
 
-function App(props) {
+function App() {
+  //state for search query photos
   const [photos, setPhotos] = useState([]);
   const [title, setTitle] = useState('');
+  //state photos of static routes
+  const [catPhotos, setCatPhotos] = useState([]);
+  const [dogPhotos, setDogPhotos] = useState([]);
+  const [cityPhotos, setCityPhotos] = useState([]);
+
+
+  //function to call for static request for pre-defined routes
+  const  fetchRequest = async (queryText) => {
+    const response = await fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${queryText}&per_page=24&format=json&nojsoncallback=1`);
+    const photoData = await response.json();
+    const photoArray = photoData.photos.photo
+  
+    if (queryText == "cats") {
+      setCatPhotos(photoArray);
+    } else if (queryText == "dogs") {
+      setDogPhotos(photoArray);
+    } else if (queryText == "city") {
+      setCityPhotos(photoArray);
+    }
+  
+  }
+
 
   //function to make call to Flickr API and return results
   const fetchData = async (queryText) => {
@@ -23,9 +45,14 @@ function App(props) {
     setTitle(queryText);
   };
 
+
+
   //call fetch function inside the useEffect hook
-  useEffect(()=> {
-    fetchData("cats");
+  useEffect(()=> {    
+    //static route API calls
+    fetchRequest("cats");
+    fetchRequest("dogs");
+    fetchRequest("city");
 
   }, []);
 
@@ -37,18 +64,14 @@ function App(props) {
      <Nav search={fetchData} />
      <Routes>
       {/* home route needs to redirect to first static route */}
-      <Route path="/" element={<Photolist photos={photos} title={title}/>} />
-      <Route path="/cats" element={<Photolist photos={photos} title={title}/>} />
-      <Route path="/dogs" element={<Photolist photos={photos} title={title}/>} />
-      <Route path="/city" element={<Photolist photos={photos} title={title}/>} />
+      <Route path="/" element={<Navigate to="/cats" />} />
+      <Route path="/cats" element={<Photolist photos={catPhotos} title="cats"/>} />
+      <Route path="/dogs" element={<Photolist photos={dogPhotos} title="dogs"/>} />
+      <Route path="/city" element={<Photolist photos={cityPhotos} title="city"/>} />
       {/* how to make this route dynamic? */}
       <Route path="/search/:query" element={<Photolist photos={photos} title={title}/>} />
      </Routes>
-  
 
- 
-  
-     
     </>
   )
 }

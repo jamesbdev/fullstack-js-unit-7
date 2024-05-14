@@ -1,8 +1,8 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import PhotoList from "./PhotoList";
+import { Route, NavLink } from "react-router-dom";
 
 const Nav = (props) => {
-  console.log("Nav component has been rendered");
     return (
         <nav className="main-nav">
         <ul>
@@ -13,8 +13,6 @@ const Nav = (props) => {
           <NavLink to="/dogs">Dogs</NavLink>
           </li>
           <li><NavLink to="/city">City</NavLink></li>
-         
-    
         </ul>
       </nav>
     )
