@@ -5,8 +5,6 @@ import './index.css'
 import { BrowserRouter } from "react-router-dom";
 
 
-console.log("root component has been rendered");
-
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
