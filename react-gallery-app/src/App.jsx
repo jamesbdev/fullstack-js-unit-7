@@ -63,12 +63,10 @@ function App() {
      <Search search={fetchData} query={title}/>
      <Nav search={fetchData} />
      <Routes>
-      {/* home route needs to redirect to first static route */}
       <Route path="/" element={<Navigate to="/cats" />} />
       <Route path="/cats" element={<Photolist photos={catPhotos} title="cats"/>} />
       <Route path="/dogs" element={<Photolist photos={dogPhotos} title="dogs"/>} />
       <Route path="/city" element={<Photolist photos={cityPhotos} title="city"/>} />
-      {/* how to make this route dynamic? */}
       <Route path="/search/:query" element={<Photolist photos={photos} title={title}/>} />
      </Routes>
 
