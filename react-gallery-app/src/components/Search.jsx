@@ -6,8 +6,6 @@ import { Navigate, Route, useNavigate } from 'react-router-dom';
 const Search = (props) => {
   //controls the state for the input value
   const [inputValue, setInputValue ] = useState('');
-  //state to check if the form has been submited
-  const [formSubmited, setFormSubmitted] = useState(false);
   
   //function to change state of input value
   const handleChange = (event) => {
