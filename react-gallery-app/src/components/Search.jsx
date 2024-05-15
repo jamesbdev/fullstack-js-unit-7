@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Navigate, Route, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const Search = (props) => {
@@ -22,7 +22,6 @@ const Search = (props) => {
     //make fetch request using inputValue as argument
     props.search(inputValue);
     //redirect user to search query route
-    setFormSubmitted(true);
     //navigate to search route
     navigate(`/search/${inputValue}`);
   }
