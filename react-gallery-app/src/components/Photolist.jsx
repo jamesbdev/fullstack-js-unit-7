@@ -16,6 +16,7 @@ const PhotoList = (props) => {
         { props.isLoading ? <p>Loading...</p> : null }
         <div className="photo-container">
           <h2>{props.title}</h2>
+          { photos.length <= 0 ? <p>Sorry there are no matches for your search. Please try another keyword.</p> : null }
           <ul>
             {/* iterate through photo array and display Photo component */}
             { photos.map((photo, index) => {
