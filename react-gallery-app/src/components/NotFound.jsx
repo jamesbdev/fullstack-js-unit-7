@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-
+//displays an error message for routes that are not found
 function NotFound () {
   return(
     <div>

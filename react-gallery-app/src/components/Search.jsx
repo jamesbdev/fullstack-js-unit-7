@@ -2,7 +2,8 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
-
+//this component displays the search input and submit button
+//it takes the fetch request as a prop
 const Search = (props) => {
   //controls the state for the input value
   const [inputValue, setInputValue ] = useState('');
@@ -10,12 +11,11 @@ const Search = (props) => {
   //function to change state of input value
   const handleChange = (event) => {
     setInputValue(event.target.value);
- 
   }
 
   const navigate = useNavigate();
   
-  //requests data from the API 
+  //requests data from the API when submitting form
   const searchHandler = (event) => {
     //prevent form submission
     event.preventDefault();

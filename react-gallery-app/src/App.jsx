@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 import { Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import NotFound from './components/NotFound';
 
-
+//main component for the app
 function App() {
   //state for search query photos
   const [photos, setPhotos] = useState([]);
@@ -23,11 +23,8 @@ function App() {
 
   //function to call for static request for pre-defined routes
   const fetchRequest = async (queryText) => {
- 
     const response = await fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${queryText}&per_page=24&format=json&nojsoncallback=1`);
     const photoData = await response.json();
-  
-  
     const photoArray = photoData.photos.photo
   
     if (queryText == "cats") {
@@ -53,16 +50,12 @@ function App() {
     setIsLoading(false);
   };
 
-
-
   //call fetch function inside the useEffect hook
   useEffect(()=> {    
     //static route API calls
     fetchRequest("cats");
     fetchRequest("dogs");
     fetchRequest("city");
-
-   
 
     //fetch request for data from /search
      //how to get data from params? 

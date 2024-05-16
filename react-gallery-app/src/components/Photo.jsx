@@ -1,5 +1,6 @@
     import React from "react";
 
+    //displays an individual image for the gallery
     const Photo = (props) => {
         //get data from photo object
         const photoId = props.photo.id;
