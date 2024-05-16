@@ -17,13 +17,17 @@ function App() {
   const [catPhotos, setCatPhotos] = useState([]);
   const [dogPhotos, setDogPhotos] = useState([]);
   const [cityPhotos, setCityPhotos] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const location = useLocation();
 
   //function to call for static request for pre-defined routes
   const fetchRequest = async (queryText) => {
+ 
     const response = await fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${queryText}&per_page=24&format=json&nojsoncallback=1`);
     const photoData = await response.json();
+  
+  
     const photoArray = photoData.photos.photo
   
     if (queryText == "cats") {
@@ -39,12 +43,14 @@ function App() {
 
   //function to make call to Flickr API and return results
   const fetchData = async (queryText) => {
+    setIsLoading(true);
     const response = await fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${queryText}&per_page=24&format=json&nojsoncallback=1`);
     const data = await response.json();
     //change state of Photos array
     setPhotos(data.photos.photo);
     //sets the title state with the user input
     setTitle(queryText);
+    setIsLoading(false);
   };
 
 
@@ -59,7 +65,7 @@ function App() {
    
 
     //fetch request for data from /search
-     //how to get params? 
+     //how to get data from params? 
 
     //when click back and forth
     //if current page url contains /search
@@ -73,6 +79,7 @@ function App() {
   return (
     <>
       {/* display Search and Nav for every view */}
+    
      <Search search={fetchData} query={title}/>
      <Nav search={fetchData} />
      <Routes>
@@ -80,7 +87,7 @@ function App() {
       <Route path="/cats" element={<PhotoList photos={catPhotos} title="cats"/>} />
       <Route path="/dogs" element={<PhotoList photos={dogPhotos} title="dogs"/>} />
       <Route path="/city" element={<PhotoList photos={cityPhotos} title="city"/>} />
-      <Route path="/search/:query" element={<PhotoList photos={photos} title={title}/>} />
+      <Route path="/search/:query" element={<PhotoList isLoading={isLoading} photos={photos} title={title}/>} />
       <Route path="*" element={<NotFound />} />
      </Routes>
 

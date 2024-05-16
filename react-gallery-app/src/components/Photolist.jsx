@@ -13,6 +13,7 @@ const PhotoList = (props) => {
   if (photos !== null && photos !== undefined) {
     return(
       <>
+        { props.isLoading ? <p>Loading...</p> : null }
         <div className="photo-container">
           <h2>{props.title}</h2>
           <ul>
