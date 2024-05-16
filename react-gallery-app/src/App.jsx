@@ -6,6 +6,7 @@ import PhotoList from './components/PhotoList';
 import Search from './components/Search';
 import { useState, useEffect } from 'react';
 import { Route, Routes, Navigate, useLocation } from 'react-router-dom';
+import NotFound from './components/NotFound';
 
 
 function App() {
@@ -18,7 +19,6 @@ function App() {
   const [cityPhotos, setCityPhotos] = useState([]);
 
   const location = useLocation();
-
 
   //function to call for static request for pre-defined routes
   const fetchRequest = async (queryText) => {
@@ -56,7 +56,16 @@ function App() {
     fetchRequest("dogs");
     fetchRequest("city");
 
+   
+
     //fetch request for data from /search
+     //how to get params? 
+
+    //when click back and forth
+    //if current page url contains /search
+    //request new data for search route
+    //display search data
+
 
   }, [location]);
 
@@ -72,6 +81,7 @@ function App() {
       <Route path="/dogs" element={<PhotoList photos={dogPhotos} title="dogs"/>} />
       <Route path="/city" element={<PhotoList photos={cityPhotos} title="city"/>} />
       <Route path="/search/:query" element={<PhotoList photos={photos} title={title}/>} />
+      <Route path="*" element={<NotFound />} />
      </Routes>
 
     </>
