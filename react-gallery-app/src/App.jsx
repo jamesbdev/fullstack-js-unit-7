@@ -38,7 +38,7 @@ function App() {
   }
 
 
-  //function to make call to Flickr API and return results
+  //function to make call to Flickr API and return results for when user uses search
   const fetchData = async (queryText) => {
     setIsLoading(true);
     try {
@@ -63,7 +63,12 @@ function App() {
     fetchRequest("cats");
     fetchRequest("dogs");
     fetchRequest("city");
-
+    
+    const searchParam = location.pathname.substring(8);
+  
+    if (location.pathname.includes("search")) {
+      fetchData(searchParam);
+    }
 
   }, [location]);
 
