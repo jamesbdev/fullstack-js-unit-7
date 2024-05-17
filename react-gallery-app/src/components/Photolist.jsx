@@ -14,23 +14,31 @@ const PhotoList = (props) => {
   //store array of photos
   const photos = props.photos;
 
-  return (
-    <>
-      {/* check if data is loading. If yes displays the loading message */}
-      {props.isLoading ? <p>Loading...</p> : null}
-      <div className="photo-container">
-        <h2>{props.title}</h2>
-        {/* Check if array of photos is empty. If yes, display error message */}
-        {photos.length <= 0 ? <NoResults /> : null}
-        <ul>
-          {/* iterate through photo array and display Photo component */}
-          {photos.map((photo, index) => {
-            return <Photo key={index} photo={photo} />;
-          })}
-        </ul>
-      </div>
-    </>
-  );
+  if(photos.length <= 0) {
+    return (
+      <NoResults />
+    )
+
+  } else {
+    return (
+      <>
+        {/* check if data is loading. If yes displays the loading message */}
+        {props.isLoading ? <p>Loading...</p> : null}
+        <div className="photo-container">
+          <h2>{props.title}</h2>
+          {/* Check if array of photos is empty. If yes, display error message */}
+          {/* {photos.length <= 0 ? <NoResults /> : null} */}
+          <ul>
+            {/* iterate through photo array and display Photo component */}
+            {photos.map((photo, index) => {
+              return <Photo key={index} photo={photo} />;
+              })}
+          </ul>
+        </div>
+      </>
+    )
+  }
+
 };
 
 export default PhotoList;
