@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Photo from "./Photo";
-import Search from "./Search";
 import { useParams } from "react-router";
+import NoResults from "./NoResults";
 
 //displays a gallery of photos
-//it takes 3 props:
+//takes 3 props:
 // photos array, returned from a fetch request to the Flickr API
 // title to display the gallery title
 // in the case of the searched query it has a isLoading prop to check if the images are loading
@@ -21,12 +21,7 @@ const PhotoList = (props) => {
       <div className="photo-container">
         <h2>{props.title}</h2>
         {/* Check if array of photos is empty. If yes, display error message */}
-        {photos.length <= 0 ? (
-          <p>
-            Sorry there are no matches for your search. Please try another
-            keyword.
-          </p>
-        ) : null}
+        {photos.length <= 0 ? <NoResults /> : null}
         <ul>
           {/* iterate through photo array and display Photo component */}
           {photos.map((photo, index) => {
