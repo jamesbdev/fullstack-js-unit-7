@@ -64,8 +64,9 @@ function App() {
     fetchRequest("dogs");
     fetchRequest("city");
     
+    //get the search param
     const searchParam = location.pathname.substring(8);
-  
+    //fetch photos for the new search param
     if (location.pathname.includes("search")) {
       fetchData(searchParam);
     }
