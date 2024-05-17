@@ -13,8 +13,8 @@ const PhotoList = (props) => {
 
   //store array of photos
   const photos = props.photos;
- 
-  if (photos !== null && photos !== undefined) {
+
+  
     return(
       <>
       {/* check if data is loading. If yes displays the loading message */}
@@ -32,18 +32,7 @@ const PhotoList = (props) => {
           </ul>
        </div>
       </>
-
-    
   ) 
-  } else {
-    return (
-      
-      <div className="photo-container">
-        <Search />
-       <h2> photo is undefined</h2>
-    </div>
-    )
-  }
    
 }
 
