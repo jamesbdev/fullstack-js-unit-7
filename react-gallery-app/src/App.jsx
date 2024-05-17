@@ -41,13 +41,20 @@ function App() {
   //function to make call to Flickr API and return results
   const fetchData = async (queryText) => {
     setIsLoading(true);
-    const response = await fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${queryText}&per_page=24&format=json&nojsoncallback=1`);
-    const data = await response.json();
-    //change state of Photos array
-    setPhotos(data.photos.photo);
-    //sets the title state with the user input
-    setTitle(queryText);
-    setIsLoading(false);
+    try {
+      const response = await fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${queryText}&per_page=24&format=json&nojsoncallback=1`);
+      if(!response.ok) {
+        throw new Error("Network response not ok");
+      }
+      const data = await response.json();
+      //change state of Photos array
+      setPhotos(data.photos.photo);
+      //sets the title state with the user input
+      setTitle(queryText);
+      setIsLoading(false);
+    } catch (error) {
+      console.error("There is an issue with the fetch request", error);
+    }
   };
 
   //call fetch function inside the useEffect hook
@@ -56,14 +63,6 @@ function App() {
     fetchRequest("cats");
     fetchRequest("dogs");
     fetchRequest("city");
-
-    //fetch request for data from /search
-     //how to get data from params? 
-
-    //when click back and forth
-    //if current page url contains /search
-    //request new data for search route
-    //display search data
 
 
   }, [location]);
