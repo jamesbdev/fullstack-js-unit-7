@@ -13,9 +13,12 @@ const PhotoList = (props) => {
 
   //store array of photos
   const photos = props.photos;
-  
-  {/* Check if array of photos is empty. If yes, display error message */}
-  if(photos.length <= 0) {
+
+  {/* checks for loading state and render loading message */}
+  if (props.isLoading) {
+    return <div> <h2>Loading...</h2></div>
+    {/* check if the photo array is empty */}
+  } else if (photos.length <= 0) {
     return (
       <NoResults />
     )
@@ -23,8 +26,6 @@ const PhotoList = (props) => {
   } else {
     return (
       <>
-        {/* check if data is loading. If yes displays the loading message */}
-        {props.isLoading ? <p>Loading...</p> : null}
         <div className="photo-container">
           <h2>{props.title}</h2>
           <ul>
