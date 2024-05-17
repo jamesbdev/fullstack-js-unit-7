@@ -21,12 +21,8 @@ function App() {
 
   const location = useLocation();
 
-  //function to call for static request for pre-defined routes
-  const fetchRequest = async (queryText) => {
-    const response = await fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${queryText}&per_page=24&format=json&nojsoncallback=1`);
-    const photoData = await response.json();
-    const photoArray = photoData.photos.photo
-  
+  //changes state of static routes data
+  const changeStaticPhotos = (queryText, photoArray) => {
     if (queryText == "cats") {
       setCatPhotos(photoArray);
     } else if (queryText == "dogs") {
@@ -34,7 +30,23 @@ function App() {
     } else if (queryText == "city") {
       setCityPhotos(photoArray);
     }
+  }
+
+  //function to call for static request for pre-defined routes
+  const fetchRequest = async (queryText) => {
+    const response = await fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${queryText}&per_page=24&format=json&nojsoncallback=1`);
+    const photoData = await response.json();
+    const photoArray = photoData.photos.photo
+    //change state of static routes
+    changeStaticPhotos(queryText, photoArray);
   
+  }
+
+  //make state changes for dynamic route
+  const changeStateDynamic = (queryText, photosArray) => {
+    setPhotos(photosArray);
+    setTitle(queryText);
+    setIsLoading(false);
   }
 
 
@@ -47,11 +59,9 @@ function App() {
         throw new Error("Network response not ok");
       }
       const data = await response.json();
-      //change state of Photos array
-      setPhotos(data.photos.photo);
-      //sets the title state with the user input
-      setTitle(queryText);
-      setIsLoading(false);
+      const photos = data.photos.photo;
+      //change state of photos, title, isLoading
+      changeStateDynamic(queryText, photos);
     } catch (error) {
       console.error("There is an issue with the fetch request", error);
     }
